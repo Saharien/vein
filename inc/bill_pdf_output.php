@@ -145,7 +145,7 @@ class PDF extends FPDF
     for($i = $start; $continue == true; $i++) {
       $this->writeRow($y, $entries[$i]);
       $y = $this->GetY() + 2;
-      if( $y > 230 || $i + 2 > count($entries) ) {  // +2 weil: es geht um nächsten Lauf und start war bei 0
+      if( $y > 230 || $i + 2 > count($entries) ) {  // +2 weil: es geht um nï¿½chsten Lauf und start war bei 0
         $continue = false;
       }
     }
@@ -155,7 +155,7 @@ class PDF extends FPDF
     if ( $i + 2 > count($entries) ) {   // alle rechnungseintraege ausgegeben
       return(0);
     } else {                            // naechster auszugebender rechnungseintrag
-      // wurde am Anfang von for-Schleife noch erhöht, muss hier nicht mehr erhoeht werden
+      // wurde am Anfang von for-Schleife noch erhï¿½ht, muss hier nicht mehr erhoeht werden
       return($i);
     }
 
@@ -172,7 +172,9 @@ class PDF extends FPDF
     $this->Cell(25, 4, $net, 0, 1, 'R');
 
     $this->SetXY(90, $y + 8);
-    $this->Cell(60, 4, 'zzgl. 19% Mehrwertsteuer:', 0, 1, 'R');
+    
+    $this->Cell(60, 4, 'zzgl. 16% Mehrwertsteuer:', 0, 1, 'R'); // TEMPUST
+    //$this->Cell(60, 4, 'zzgl. 19% Mehrwertsteuer:', 0, 1, 'R');
     $this->SetXY(165, $y + 8);
     $this->Cell(25, 4, $tax, 0, 1, 'R');
 

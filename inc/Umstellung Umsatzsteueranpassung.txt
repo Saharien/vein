@@ -1,0 +1,14 @@
+Alle Änderungen markiert mit "TEMPUST"
+
+
+Bestellung.php 
+    erzeuge_posten_regelmaessig
+        Für 19%: Überspringe alle Posten, die ihr Bis-Datum in der reduzierten Periode haben
+        Für 16%: Überspringe alle Posten, die ihr Bis-Datum ausserhalb der reduzierten Periode haben
+
+bill_pdf_output.php
+    Zeile 175
+
+Rechnung.php
+    erzeuge_pdf
+        

@@ -43,7 +43,6 @@
       
       public function starte_druck($datum, $testlauf) 
       {
-          
           $drucklauf = new Drucklauf();
           $drucklauf->set_startzeit();
           

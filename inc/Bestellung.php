@@ -67,7 +67,7 @@ class Bestellung
     if($this->zahlungsrhytmus != Konst::$ZAHLUNGSRHYTMUS_JAEHRLICH &&
        $this->zahlungsrhytmus != Konst::$ZAHLUNGSRHYTMUS_MONATLICH)
     {
-        Throw new Exception("Zahlungsrhytmus nicht gef�llt bei Bestellung Nr. " . $this->bestellungsnummer);
+        Throw new Exception("Zahlungsrhytmus nicht gefuellt bei Bestellung Nr. " . $this->bestellungsnummer);
     }
     
     $this->position++;
@@ -152,7 +152,7 @@ class Bestellung
           return;
       }
       
-//    F�r jedes Jahr/Monat ab Bestellung
+//    Für jedes Jahr/Monat ab Bestellung
 
       for($monatjahr = clone $effektiv_start;
           $monatjahr->ist_kleiner_gleich($lauf_ende);
@@ -169,13 +169,23 @@ class Bestellung
               $datum_bis = mktime(0, 0, 0, date("m", $datum_von), date("d", $datum_von), date("Y", $datum_von) + 1) - 86400;
           }
           
-          // Wenn gek�ndigt, Schleife verlassen
+          // Wenn gekündigt, Schleife verlassen
           if($this->kuendigungsdatum <> 0) {
               if($this->kuendigungsdatum <= ( $datum_bis - Konst::$KUENDIGUNGSFRIST * 86400)) {
                   break;
               }
           }
-          
+
+        //   // Temporäre Lösung zur temporären USt-Senkung (TEMPUST): Nur Einträge für 19% erstellen
+        //   if($datum_bis >= mktime(0, 0, 0, 7, 1, 2020) && $datum_bis < mktime(0, 0, 0, 1, 1, 2021)) {
+        //     continue;
+        //   }
+
+        // Temporäre Lösung zur temporären USt-Senkung (TEMPUST): Nur Einträge für 16% erstellen
+        if(!($datum_bis >= mktime(0, 0, 0, 7, 1, 2020) && $datum_bis < mktime(0, 0, 0, 1, 1, 2021))) {
+            continue;
+        }
+
           if(!Rechnungseintrag::existiert($this->bestellungsnummer, $monatjahr->get_monat(), $monatjahr->get_jahr())) {
 
               $rechnungseintrag = new Rechnungseintrag(
