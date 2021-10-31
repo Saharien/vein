@@ -250,10 +250,10 @@ class DB_Mysql_Prod extends DB_Mysql {
 class DB {
   private static $db_handle;
   public static function get_db() {
-    if(is_null($db_handle)) {
-        $db_handle = new DB_Mysql_Prod();
+    if(is_null(self::$db_handle)) {
+        self::$db_handle = new DB_Mysql_Prod();
     }
-    return($db_handle);
+    return(self::$db_handle);
   }
 }
 

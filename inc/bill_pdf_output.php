@@ -120,7 +120,7 @@ class PDF extends FPDF
   function writeRow($y, $entry)
   {
 
-    $this->SetFont('Arial', '', 11);7
+    $this->SetFont('Arial', '', 11);
     $this->SetXY(20, $y);
     $this->Cell(60, 4, $entry['quantity'], 0, 1, 'L');
 
