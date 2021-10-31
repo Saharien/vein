@@ -176,16 +176,6 @@ class Bestellung
               }
           }
 
-        //   // Temporäre Lösung zur temporären USt-Senkung (TEMPUST): Nur Einträge für 19% erstellen
-        //   if($datum_bis >= mktime(0, 0, 0, 7, 1, 2020) && $datum_bis < mktime(0, 0, 0, 1, 1, 2021)) {
-        //     continue;
-        //   }
-
-        // Temporäre Lösung zur temporären USt-Senkung (TEMPUST): Nur Einträge für 16% erstellen
-        if(!($datum_bis >= mktime(0, 0, 0, 7, 1, 2020) && $datum_bis < mktime(0, 0, 0, 1, 1, 2021))) {
-            continue;
-        }
-
           if(!Rechnungseintrag::existiert($this->bestellungsnummer, $monatjahr->get_monat(), $monatjahr->get_jahr())) {
 
               $rechnungseintrag = new Rechnungseintrag(

@@ -122,10 +122,8 @@
             }
 
             $netto_endbetrag = number_format(round($this->netto_endbetrag, 4), 4, ',', '') . ' EUR';
-            $mwst = number_format(round($this->netto_endbetrag * 0.16, 4), 4, ',', '') . ' EUR'; // TEMPUST
-            $brutto_endbetrag = number_format(round($this->netto_endbetrag * 1.16, 2), 2, ',', '') . ' EUR'; // TEMPUST
-            //$mwst = number_format(round($this->netto_endbetrag * 0.19, 4), 4, ',', '') . ' EUR';
-            //$brutto_endbetrag = number_format(round($this->netto_endbetrag * 1.19, 2), 2, ',', '') . ' EUR';
+            $mwst = number_format(round($this->netto_endbetrag * 0.19, 4), 4, ',', '') . ' EUR';
+            $brutto_endbetrag = number_format(round($this->netto_endbetrag * 1.19, 2), 2, ',', '') . ' EUR';
             
             createBill($address,
                        $this->posten,

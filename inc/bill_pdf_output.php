@@ -120,7 +120,7 @@ class PDF extends FPDF
   function writeRow($y, $entry)
   {
 
-    $this->SetFont('Arial', '', 11);
+    $this->SetFont('Arial', '', 11);7
     $this->SetXY(20, $y);
     $this->Cell(60, 4, $entry['quantity'], 0, 1, 'L');
 
@@ -173,8 +173,7 @@ class PDF extends FPDF
 
     $this->SetXY(90, $y + 8);
     
-    $this->Cell(60, 4, 'zzgl. 16% Mehrwertsteuer:', 0, 1, 'R'); // TEMPUST
-    //$this->Cell(60, 4, 'zzgl. 19% Mehrwertsteuer:', 0, 1, 'R');
+    $this->Cell(60, 4, 'zzgl. 19% Mehrwertsteuer:', 0, 1, 'R');
     $this->SetXY(165, $y + 8);
     $this->Cell(25, 4, $tax, 0, 1, 'R');
 
