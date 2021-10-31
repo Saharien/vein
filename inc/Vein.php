@@ -55,7 +55,7 @@
                   $erste_rechnungsnummer = $rechnungsnummer;
               }
               $rechnung = new Rechnung($kundennummer, $rechnungsnummer , $datum);
-              $rechnung->erzeuge_pdf($pfad);
+              $rechnung->erzeuge_pdf();
               if($testlauf == false) {
                 $rechnung->markiere_als_gedruckt();
               }

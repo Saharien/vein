@@ -34,11 +34,8 @@ class PDF extends FPDF
     $i=0;
     foreach($address as $row) {
       $i++;
-//      if($i==count($address)) {
-//        $this->Ln();               // empty line before postal code
-//      }
       $this->SetX(20);
-      $this->Cell(78, 5, $row, 0, 1, 'L');
+      $this->Cell(78, 5, utf8_decode($row), 0, 1, 'L');
     }
     $this->SetX(20);
     $this->Cell(78,4,'','B',1,'L');
@@ -131,7 +128,7 @@ class PDF extends FPDF
     $this->Cell(25, 4, $entry['totalprice'], 0, 1, 'R');
 
     $this->SetXY(38, $y);
-    $this->MultiCell(95, 4, $entry['description'], 0, 'L', false);
+    $this->MultiCell(95, 4, utf8_decode($entry['description']), 0, 'L', false);
 
   }
 
@@ -145,7 +142,7 @@ class PDF extends FPDF
     for($i = $start; $continue == true; $i++) {
       $this->writeRow($y, $entries[$i]);
       $y = $this->GetY() + 2;
-      if( $y > 230 || $i + 2 > count($entries) ) {  // +2 weil: es geht um n�chsten Lauf und start war bei 0
+      if( $y > 230 || $i + 2 > count($entries) ) {  // +2 weil: es geht um nächsten Lauf und start war bei 0
         $continue = false;
       }
     }
@@ -155,7 +152,7 @@ class PDF extends FPDF
     if ( $i + 2 > count($entries) ) {   // alle rechnungseintraege ausgegeben
       return(0);
     } else {                            // naechster auszugebender rechnungseintrag
-      // wurde am Anfang von for-Schleife noch erh�ht, muss hier nicht mehr erhoeht werden
+      // wurde am Anfang von for-Schleife noch erhöht, muss hier nicht mehr erhoeht werden
       return($i);
     }
 
@@ -187,7 +184,7 @@ class PDF extends FPDF
 
     $this->SetFont('Arial', '', 11);
     $this->SetXY(20, $y + 25);
-    $this->MultiCell(170, 5, $conditions, 0, 'L', false);
+    $this->MultiCell(170, 5, utf8_decode($conditions), 0, 'L', false);
 
   }
 
