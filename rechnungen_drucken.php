@@ -14,7 +14,7 @@
   require_once 'inc/bill_pdf_output.php';
   
   $vein = new Vein();  
-  $vein->starte_druck('31.10.2021', true);  // Rechnungsdatum, Testlauf
+  $vein->starte_druck('31.10.2021', false);  // Rechnungsdatum, Testlauf
   echo 'fertig';
 
 ?>
