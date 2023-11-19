@@ -21,7 +21,7 @@ class PDF extends FPDF
     $this->Cell(0,6,'   Seite '.$this->PageNo().' von {nb}',0,0,'C');
   }
 
-  function headerFirstPage($address, $invoice_no, $date)
+  function headerFirstPage($address, $invoice_no, $date, $ustid)
   {
 
     // Print reciever adress
@@ -70,10 +70,16 @@ class PDF extends FPDF
     $this->Cell(60, 4, 'Rechnungsnummer', 0, 1, 'L');
     $this->SetX(125);
     $this->Cell(60, 4, 'Datum', 0, 1, 'L');
+    if(strlen($ustid)>0) {
+      $this->SetX(125);
+      $this->Cell(60, 4, 'USt.-ID', 0, 1, 'L');
+    }
     $this->SetXY(131, 97);
     $this->Cell(60, 4, $invoice_no, 0, 1, 'R');
     $this->SetX(131);
     $this->Cell(60, 4, $date, 0, 1, 'R');
+    $this->SetX(131);
+    $this->Cell(60, 4, $ustid, 0, 1, 'R');
 
   }
 
@@ -190,7 +196,7 @@ class PDF extends FPDF
 
 }
 
-function createBill($address, $entries, $bill_no, $date, $net, $tax, $gross, $conditions, $file)
+function createBill($address, $entries, $bill_no, $date, $net, $tax, $gross, $conditions, $ustid, $file)
 {
 
   //Instanciation of inherited class
@@ -198,7 +204,7 @@ function createBill($address, $entries, $bill_no, $date, $net, $tax, $gross, $co
   $pdf->AliasNbPages();
   $pdf->AddPage();
 
-  $pdf->headerFirstPage($address, $bill_no, $date);
+  $pdf->headerFirstPage($address, $bill_no, $date, $ustid);
 
   $next_entry = $pdf->writeEntries($entries, 120, 0);
 

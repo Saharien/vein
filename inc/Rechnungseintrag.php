@@ -50,7 +50,7 @@ class Rechnungseintrag
             // Update - TODO
         } else {
 
-            // N�chste freie Nummer herausfinden
+            // Nächste freie Nummer herausfinden
             
             $abfrage = $this->db_handle->prepare("SELECT max(Eintragsnummer) FROM rechnungseintraege");
             $abfrage->execute();

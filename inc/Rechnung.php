@@ -61,7 +61,7 @@
           
       }
       
-      // ToDo: Eigentlich geh�rt sowas in eine Klasse Kunde...
+      // ToDo: Eigentlich gehört sowas in eine Klasse Kunde...
       private function lade_adresse()
       {
           $abfrage = $this->db_handle->prepare("SELECT Rechnungsadressennummer FROM kunden WHERE Kundennummer = :1");
@@ -69,12 +69,12 @@
           $row = $abfrage->fetch_assoc();
           $rechnungsadressennummer = $row["Rechnungsadressennummer"];
           
-          $abfrage = $this->db_handle->prepare("SELECT Firmenname, Anrede, Vorname, Name, StrassePostfach, PLZ, Ort FROM adressen WHERE Adressennummer = :1");
+          $abfrage = $this->db_handle->prepare("SELECT Firmenname, Anrede, Vorname, Name, StrassePostfach, Land, PLZ, Ort, UStID FROM adressen WHERE Adressennummer = :1");
           $abfrage->execute($rechnungsadressennummer);
           $this->adresse = $abfrage->fetch_assoc();
       }
       
-      // ToDo: Eigentlich geh�rt sowas in eine Klasse Kunde...
+      // ToDo: Eigentlich gehört sowas in eine Klasse Kunde...
       private function ermittle_conditions()
       {
           $abfrage = $this->db_handle->prepare("SELECT Zahlungsart, Bankverbindungsnummer FROM kunden WHERE Kundennummer = :1");
@@ -111,7 +111,13 @@
             $address[$line] = '';   // Leerzeile vor PLZ
             $line++;
             
-            $address[$line] = $this->adresse['PLZ'] . ' ' . $this->adresse['Ort'];
+            if($this->adresse['Land']!='DE') {
+                $address[$line] = $this->adresse['Land'] . '-' . $this->adresse['PLZ'] . ' ' . $this->adresse['Ort'];
+            } else {
+                $address[$line] = $this->adresse['PLZ'] . ' ' . $this->adresse['Ort'];
+            }
+
+
 
             if($this->zahlungsart==Konst::$ZAHLUNGSART_RECHNUNNG) {
                 $conditions = 'Bitte ueberweisen Sie den Betrag auf unser Konto.';
@@ -133,6 +139,7 @@
                        $mwst,
                        $brutto_endbetrag,
                        $conditions,
+                       $this->adresse['UStID'],
                        'rechnungen/' . $this->rechnungsnummer . '.pdf');
           
       }
