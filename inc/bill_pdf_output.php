@@ -15,7 +15,8 @@ class PDF extends FPDF
   {
     $this->SetY(-25);
     $this->SetFont('Arial','',11);
-    $this->Cell(0,6,'Bankverbindung:      IBAN DE68 7409 0000 0106 6067 68      BIC GENODEF1PA1      VR-Bank Passau',0,1,'C');
+    $this->Cell(0,6,'Bankverbindung:      IBAN DE52 7217 0363 0061 1079 00      BIC DEUTDEMMXXX      Deutsche Bank AG',0,1,'C');
+    //$this->Cell(0,6,'Bankverbindung:      IBAN DE68 7409 0000 0106 6067 68      BIC GENODEF1PA1      VR-Bank Passau',0,1,'C');
     $this->Cell(0,6,'USt.-Id.-Nr. DE201906512      StNr. 153/234/70380',0,1,'C');
     $this->SetFont('Arial','B',11);
     $this->Cell(0,6,'   Seite '.$this->PageNo().' von {nb}',0,0,'C');
