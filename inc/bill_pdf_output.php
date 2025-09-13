@@ -152,7 +152,7 @@ class PDF extends FPDF
     for($i = $start; $continue == true; $i++) {
       $this->writeRow($y, $entries[$i]);
       $y = $this->GetY() + 2;
-      if( $y > 227 || $i + 2 > count($entries) ) {  // +2 weil: es geht um nächsten Lauf und start war bei 0
+      if( $y > 218 || $i + 2 > count($entries) ) {  // +2 weil: es geht um nächsten Lauf und start war bei 0
         $continue = false;
       }
     }
