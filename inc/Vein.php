@@ -56,6 +56,15 @@
               }
               $rechnung = new Rechnung($kundennummer, $rechnungsnummer , $datum);
               $rechnung->erzeuge_pdf();
+
+              $rechnungsdaten = $rechnung->get_rechnungsdaten_fuer_ausgabe();
+              echo '<tr>' .
+                   '<td>' . $rechnungsdaten['datum'] . '</td>' .
+                   '<td>' . $rechnungsdaten['rechnungsnummer'] . '</td>' .
+                   '<td>' . $rechnungsdaten['kunde'] . '</td>' .
+                   '<td style="text-align: right;">' . $rechnungsdaten['brutto'] . '</td>' .
+                   '</tr>' . PHP_EOL;
+
               if($testlauf == false) {
                 $rechnung->markiere_als_gedruckt();
               }

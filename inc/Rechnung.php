@@ -94,7 +94,7 @@
       
       public function erzeuge_pdf()
       {
-      
+  
             $line = 0;
             if($this->adresse['Firmenname']!=NULL)
             {
@@ -141,13 +141,36 @@
                        $conditions,
                        $this->adresse['UStID'],
                        'rechnungen/' . $this->rechnungsnummer . '.pdf');
-          
+      
+  }
+  
+  public function get_rechnungsdaten_fuer_ausgabe()
+  {
+      $kundeninfo_parts = [];
+      if (!empty($this->adresse['Firmenname'])) {
+          $kundeninfo_parts[] = $this->adresse['Firmenname'];
       }
-      
-      
-      public function markiere_als_gedruckt()
-      {
-        foreach($this->posten as $einzelposten)
+      if (!empty($this->adresse['Vorname'])) {
+          $kundeninfo_parts[] = $this->adresse['Vorname'];
+      }
+      if (!empty($this->adresse['Name'])) {
+          $kundeninfo_parts[] = $this->adresse['Name'];
+      }
+      $kundeninfo = implode(' ', $kundeninfo_parts);
+
+      $brutto_endbetrag = number_format(round($this->netto_endbetrag * 1.19, 2), 2, ',', '.') . ' €';
+
+      return [
+          'datum' => $this->datum,
+          'rechnungsnummer' => $this->rechnungsnummer,
+          'kunde' => $kundeninfo,
+          'brutto' => $brutto_endbetrag
+      ];
+  }
+  
+  public function markiere_als_gedruckt()
+  {
+    foreach($this->posten as $einzelposten)
         {
             $abfrage = $this->db_handle->prepare
               ("UPDATE rechnungseintraege SET Rechnungsnummer = :1 WHERE Eintragsnummer = :2");
@@ -155,7 +178,6 @@
             $abfrage->execute($this->rechnungsnummer, $einzelposten['Eintragsnummer']);
         }
       }
-      
   }
 
 ?>
